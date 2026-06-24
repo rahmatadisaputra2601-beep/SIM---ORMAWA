@@ -22,17 +22,16 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-```php
+require __DIR__.'/auth.php';
+
 Route::get('/gas-db', function () {
     try {
-        // Paksa jalankan migrasi di lingkungan production
         \Artisan::call('migrate:fresh', [
             '--seed' => true,
             '--force' => true,
         ]);
         return "🔥 BOOM! Database SIM-ORMAWA Berhasil Disuntik Online!";
     } catch (\Exception $e) {
-        // Kalau gagal, tampilkan eror aslinya di browser biar kita tahu penyebabnya
         return "Waduh Eror Koneksi Database, Bro: <br><pre>" . $e->getMessage() . "</pre>";
     }
 });
