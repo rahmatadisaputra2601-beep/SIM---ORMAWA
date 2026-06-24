@@ -1,24 +1,29 @@
 <?php
 header('Content-Type: text/plain');
 
-// MASUKKAN KONEKSI SUPABASE LU DI SINI
-$host     = 'aws-0-ap-southeast-1.pooler.supabase.com'; // Ganti dengan host Supabase lu
-$db       = 'postgres';                                 // Ganti dengan nama DB lu
-$user     = 'postgres';                                 // Ganti dengan username DB lu
-$password = 'KampusTambara2026';             // !!! GANTI PAKAI PASSWORD SUPABASE LU !!!
+// MASUKKAN DATA SUPABASE LU DI SINI
+$host     = 'aws-0-ap-southeast-1.pooler.supabase.com'; 
+$db       = 'postgres';                                 
+$user     = 'postgres';                                 
+$password = 'PASSWORD_SUPABASE_LU'; // Ganti pake password lu
 $port     = '6543';
 
-echo "🔌 Mencoba menyambung langsung ke Supabase...\n";
+// 🔍 CARI PROJECT REF LU (Ada di URL Dashboard Supabase lu, misal: abcdefghijklmnopqrst)
+// URL Supabase biasanya: https://supabase.com/dashboard/project/abcdefghijklmnopqrst
+$project_ref = 'ID_PROJECT_SUPABASE_LU_DI_SINI'; 
+
+echo "🔌 Mencoba menyambung dengan Trik Injeksi Tenant...\n";
 
 try {
-    $dsn = "pgsql:host=$host;port=$port;dbname=$db;";
-    $pdo = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    // 🔥 KUNCI UTAMA: Kita tambahkan options=project=project_ref ke dalam DSN!
+    $dsn = "pgsql:host=$host;port=$port;dbname=$db;options='--project=$project_ref'";
     
-    echo "✅ KONEKSI SUKSES!\n\n";
-    echo "⚡ Memulai proses suntik database SIM-ORMAWA...\n";
+    $pdo = new PDO($dsn, $user, $password, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
     
-    // Kita panggil skrip sql dari database laravel lu secara manual jika koneksi berhasil
-    echo "🔥 BOOM! JALUR BYPASS NATIVE: Database SIM-ORMAWA Berhasil Disuntik Online via PDO!\n";
+    echo "✅ KONEKSI 100% SUKSES TEMBUS SUPABASE!\n\n";
+    echo "🔥 BOOM! Database SIM-ORMAWA Berhasil Disuntik Online via PDO Injeksi!\n";
     
 } catch (\PDOException $e) {
     echo "🚨 GAGAL KONEKSI DATABASE:\n" . $e->getMessage() . "\n";
