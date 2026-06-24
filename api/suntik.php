@@ -6,7 +6,7 @@ $host     = 'aws-0-ap-southeast-1.pooler.supabase.com'; // Ganti dengan host Sup
 $db       = 'postgres';                                 // Ganti dengan nama DB lu
 $user     = 'postgres';                                 // Ganti dengan username DB lu
 $password = 'KampusTambara2026';             // !!! GANTI PAKAI PASSWORD SUPABASE LU !!!
-$port     = '5432';
+$port     = '6543';
 
 echo "🔌 Mencoba menyambung langsung ke Supabase...\n";
 
