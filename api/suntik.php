@@ -23,3 +23,4 @@ try {
 } catch (\PDOException $e) {
     echo "🚨 GAGAL KONEKSI DATABASE:\n" . $e->getMessage() . "\n";
 }
+// Pancing build ulang Vercel sukses
